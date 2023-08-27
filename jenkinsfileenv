@@ -1,0 +1,34 @@
+pipeline {
+    Agent any
+    enviorment {
+        NEW_VERSION = '1.3.0'
+        SERVER_CREDENTIALS = credentials('server-credential')
+    }
+    stages{
+        stage ('build'){
+            steps{
+            echo "this is build stage"
+            echo "building version $(NEW_VERSION)"    
+            }
+        }
+        stage ('test') {
+            steps {
+                echo "this is test stage"
+                echo "testing version $(NEW_VERSION)" 
+            }
+        }
+        stage ('Deploy'){
+            steps {
+                echo "this is Deploy stage"
+                echo "deploying with $(SERVER_CREDENTIAL)"
+            }
+        } 
+        post {
+            Always {
+                echo "it will be always excuated"
+            }
+
+
+        }
+
+}
